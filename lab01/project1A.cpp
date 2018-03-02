@@ -1,5 +1,5 @@
 /*
- * Project 1: Part A 
+ * Project 1: Part A
  *
  *      Accept input from a text file.  Each line of the text file is a
  *      sequence of digits with no spaces between digits, representing a 
@@ -19,10 +19,7 @@
  *          http://www.cplusplus.com/articles/D9j2Nwbp/
  *  3.) Convert string to char array in C++
  *          https://www.geeksforgeeks.org/convert-string-char-array-cpp/
- *  4.) STOI
-            http://www.cplusplus.com/reference/string/stoi/
- 
- 
+ *
  * Alexander Frank
  * Date created: 02.01.2018
  */
@@ -32,27 +29,40 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
+#include <ctime>
 #include <vector>
 #include <bits/stdc++.h>
 using namespace std;
+
+/*
+ * CLASS NAME
+ * CLASS DESCRIPTION
+ */
+class SOME_CLASS {
+	private:
+	
+	public:
+	    SOME_CLASS();
+	    
+	    
+};
+
+
+void clearScreen ();
 
 int main ()
 {
 	string line;
     vector <string> cardNumbersS;
     vector <long int> cardNumbersI;
-    vector <long int> sumVector;
     
     string stringConvert;
     long int intConvert;
     
     stringstream ss;
-    stringstream ss2;
-    stringstream ss3;
-    stringstream ss4;
     ifstream ifFS;
     
-    ifFS.open("card_numbers.txt");
+    ifFS.open("text.txt");
 
     while ( getline (ifFS, line) )
     {
@@ -101,65 +111,14 @@ int main ()
         strcpy(char_array, str1.c_str()); 
      
         //cout << "Char array: ";
-        cout << i+1 << ".)  CARD NUMBER: ";
+        cout << i+1 << ".) CARD NUMBER: ";
         for (int i=0; i<n; i++) 
         cout << char_array[i];
-        
-        
-        
 
         // IFF American Express  34 | 37 (15)
         if( (char_array[0] == '3' && char_array[1] == '4') || (char_array[0] == '3' && char_array[1] == '7') ) 
         {
-            cout << endl << "     CARD TYPE: Amercian Express" << endl;
-              
-            int checkDigit = static_cast<int>(str1.back())-48;  
-            
-            str1.pop_back();
-               
-            int count1 = 0;
-            int int1 = 0;
-            for (int k = str1.length()-1; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-
-                int int2 = int1*2;
-                if (int2 > 9)
-                    int2 -= 9;
-                   
-                count1 += int2;
-                //cout << "count1: " << count1 << endl;
-            }
-            
-            for (int k = str1.length()-2; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-                count1 += int1;
-                //cout << "count2: " << count1 << endl;
-            }
-                
-            count1 *= 9;
-            //cout << "count1: " << count1 << endl;
-            count1  %= 10;
-            //cout << "count1: " << count1 << endl;
-            cout << "Check digit: " << checkDigit << endl;
-                
-            if (count1 == checkDigit)
-            {
-                cout << "     This card passed the LUHN" << endl;
-            } 
-            else if (count1 != checkDigit)
-            {
-                 cout << "INVALID CARD BY LUHN" << endl;
-            }
-            
-            cout << endl;
+                cout << endl << "     CARD TYPE: Amercian Express" << endl << endl;
         }
         // IFF Discover: BIN( 6011 | 622126 – 622925 | 644 – 649 | 65 ) / Length( 16 )
         else if ( char_array[0] == '6' && char_array[1] == '0' ||
@@ -167,110 +126,12 @@ int main ()
                   char_array[0] == '6' && char_array[1] == '4' ||
                   char_array[0] == '6' && char_array[1] == '5' )
         {
-            cout << endl << "     CARD TYPE: Discover card" << endl;
-            
-            int checkDigit = static_cast<int>(str1.back())-48;  
-            
-            str1.pop_back();
-               
-            int count1 = 0;
-            int int1 = 0;
-            for (int k = str1.length()-1; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-
-                int int2 = int1*2;
-                if (int2 > 9)
-                    int2 -= 9;
-                   
-                count1 += int2;
-                //cout << "count1: " << count1 << endl;
-            }
-            
-            for (int k = str1.length()-2; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-                count1 += int1;
-                //cout << "count2: " << count1 << endl;
-            }
-                
-            count1 *= 9;
-            // << "count1: " << count1 << endl;
-            count1  %= 10;
-            //cout << "count1: " << count1 << endl;
-            cout << "Check digit: " << checkDigit << endl;
-                
-            if (count1 == checkDigit)
-            {
-                cout << "     This card passed the LUHN" << endl;
-            } 
-            else if (count1 != checkDigit)
-            {
-                 cout << "INVALID CARD BY LUHN" << endl;
-            }
-            
-            cout << endl;
-            
+            cout << endl << "     CARD TYPE: Discover card" << endl<< endl;
         }
         // IFF Visa: BIN( 4 ) / Lenth( 13 – 16 )
         else if (char_array[0] == '4' )
         {
-            cout << endl << "     CARD TYPE: Visa" << endl;
-            
-            int checkDigit = static_cast<int>(str1.back())-48;  
-            
-            str1.pop_back();
-               
-            int count1 = 0;
-            int int1 = 0;
-            for (int k = str1.length()-1; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-
-                int int2 = int1*2;
-                if (int2 > 9)
-                    int2 -= 9;
-                   
-                count1 += int2;
-                //cout << "count1: " << count1 << endl;
-            }
-            
-            for (int k = str1.length()-2; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-                count1 += int1;
-                //cout << "count2: " << count1 << endl;
-            }
-                
-            count1 *= 9;
-            //cout << "count1: " << count1 << endl;
-            count1  %= 10;
-            //cout << "count1: " << count1 << endl;
-            cout << "Check digit: " << checkDigit << endl;
-                
-            if (count1 == checkDigit)
-            {
-                cout << "     This card passed the LUHN" << endl;
-            } 
-            else if (count1 != checkDigit)
-            {
-                 cout << "INVALID CARD BY LUHN" << endl;
-            }
-            
-            cout << endl;
-                
+            cout << endl << "     CARD TYPE: Visa" << endl<< endl;
         }
         // IFF MasterCard: BIN( 51 – 55 ) /  Length( 16 )
         else if (char_array[0] == '5' && char_array[1] == '1' ||
@@ -279,112 +140,19 @@ int main ()
                   char_array[0] == '5' && char_array[1] == '4' ||
                   char_array[0] == '5' && char_array[1] == '5' )
         {
-            cout << endl << "     CARD TYPE: MasterCard" << endl;
-            
-            int checkDigit = static_cast<int>(str1.back())-48;  
-            
-            str1.pop_back();
-               
-            int count1 = 0;
-            int int1 = 0;
-            for (int k = str1.length()-1; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-
-                int int2 = int1*2;
-                if (int2 > 9)
-                    int2 -= 9;
-                   
-                count1 += int2;
-                //cout << "count1: " << count1 << endl;
-            }
-            
-            for (int k = str1.length()-2; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-                count1 += int1;
-                //cout << "count2: " << count1 << endl;
-            }
-                
-            count1 *= 9;
-            //cout << "count1: " << count1 << endl;
-            count1  %= 10;
-            //cout << "count1: " << count1 << endl;
-            cout << "Check digit: " << checkDigit << endl;
-                
-            if (count1 == checkDigit)
-            {
-                cout << "     This card passed the LUHN" << endl;
-            } 
-            else if (count1 != checkDigit)
-            {
-                 cout << "INVALID CARD BY LUHN" << endl;
-            }
-            
-            cout << endl;
+            cout << endl << "     CARD TYPE: MasterCard" << endl<< endl; 
         }
         else
         {
-            cout << endl << "     CARD TYPE: UNKNOWN" << endl;
-            
-            int checkDigit = static_cast<int>(str1.back())-48;  
-            
-            str1.pop_back();
-               
-            int count1 = 0;
-            int int1 = 0;
-            for (int k = str1.length()-1; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-
-                int int2 = int1*2;
-                if (int2 > 9)
-                    int2 -= 9;
-                   
-                count1 += int2;
-                //cout << "count1: " << count1 << endl;
-            }
-            
-            for (int k = str1.length()-2; k >= 0  ; k = k-2)
-            {
-                char a = str1.at(k);
-                int1 = static_cast<int>(str1[k])-48;
-                    
-                //cout << "int1: " << int1 << endl;
-                count1 += int1;
-                //cout << "count2: " << count1 << endl;
-            }
-                
-            count1 *= 9;
-            //cout << "count1: " << count1 << endl;
-            count1  %= 10;
-            //cout << "count1: " << count1 << endl;
-            cout << "Check digit: " << checkDigit << endl;
-                
-            if (count1 == checkDigit)
-            {
-                cout << "     This card passed the LUHN" << endl;
-            } 
-            else if (count1 != checkDigit)
-            {
-                 cout << "INVALID CARD BY LUHN" << endl;
-            }
-            
-            cout << endl;
-               
+            cout << endl << "     CARD TYPE: UNKNOWN" << endl << endl;
         }
     }
     
 	return 0;
 }
 
+void clearScreen ()
+{
+	cout << "\x1B[2J\x1B[H";
+}
 
